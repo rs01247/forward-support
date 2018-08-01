@@ -1,9 +1,10 @@
 var express = require('express');
 var exphbs = require('express-handlebars');
 var bodyParser = require('body-parser');
-var ticket = require('./controller/ticket.controller')
+//var ticket = require('./controller/ticket.controller')
 var htmlRoutes = require('./routes/htmlRoutes')
 var apiRoutes = require('./routes/apiRoutes')
+var db = require("./models");
 
 var app = express();
 var PORT = process.env.PORT || 8080;
@@ -20,13 +21,15 @@ app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 // ACCESS TO TICKET.CONTROLLER.JS IN CONTROLLER
-app.use(ticket);
+//app.use(ticket);
 
 // ACCESS TO HTMLROUTES.JS AND APIROUTES.JS
-app.use(htmlRoutes);
-app.use(apiRoutes);
+//app.use(htmlRoutes);
+//app.use(apiRoutes);
 
-app.listen(PORT, function () {
-    //LOGGING WHEN SERVER HAS STARTED
-    console.log(`Listening on ${PORT}`);
-});
+db.sequelize.sync({ force: true }).then(function() {
+    app.listen(PORT, function() {
+      console.log("App listening on PORT " + PORT);
+    });
+  });
+  
