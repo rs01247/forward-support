@@ -24,7 +24,7 @@ module.exports = function (sequelize, DataTypes) {
         },
         status:
         {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             allowNull: false
         }
 
