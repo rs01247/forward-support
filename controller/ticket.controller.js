@@ -85,7 +85,11 @@ router.get('/index', function (req, res) {
     })
 });
 
-
+router.get('/register', function (req, res) {
+    res.render('register', {
+        title: 'Support Ticket System'
+    })
+});
 
 
 module.exports = router;
