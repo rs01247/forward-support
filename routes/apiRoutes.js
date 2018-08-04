@@ -3,7 +3,11 @@ var express = require("express");
 //use routers
 var router = express.Router();
 
-//POST REQUEST TO SAVE A NEW SERVICE TICKET AND ADD TO DB
+
+
+
+
+
 router.post("/api/user", function (req, res) {
     //get data from req.body 
     var data = {
@@ -36,7 +40,7 @@ router.post("/api/user", function (req, res) {
             ticketCategory: req.body.ticketCategory,
             status: "open"
         }).then(function (dbTicket) {
-            res.redirect("/user")
+            res.redirect("/api/user")
 
         })
         // add catch error
@@ -44,7 +48,7 @@ router.post("/api/user", function (req, res) {
 });
 
 
-router.get("/user", function (req, res) {
+router.get("/api/user", function (req, res) {
     // return the tickets that are not closed from database to the user 
     db.Ticket.findAll({
         where: {
@@ -55,6 +59,7 @@ router.get("/user", function (req, res) {
         res.render("user", { Ticket: dbTicket })
     })
 });
+
 
 // UPDATE STATUS LEVEL FOR SERVICE TICKET
 router.put("api/user", function (req, res) {
@@ -70,7 +75,8 @@ router.put("api/user", function (req, res) {
 })
 
 
-router.get('/admin', function (req, res) {
+router.get('/api/admin', function (req, res) {
+    //we need to retrieve tickets for the admin who still open and related to that admin 
     res.render('admin', {
         title: 'Support Ticket System'
     })
@@ -90,17 +96,10 @@ router.put("api/user", function (req, res) {
         })
 })
 
-router.get('/index', function (req, res) {
-    res.render('index', {
-        title: 'Support Ticket System'
-    })
-});
 
-router.get('/register', function (req, res) {
-    res.render('register', {
-        title: 'Support Ticket System'
-    })
-});
+
+
+
 
 
 module.exports = router;
