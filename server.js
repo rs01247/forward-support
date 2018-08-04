@@ -36,9 +36,11 @@ const auth = jwt({
   userProperty: 'payload',
   getToken: function fromHeaderOrCookie (req) {
     if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
+      console.log("auth",req.headers.authorization.split(' ')[1]);
         return req.headers.authorization.split(' ')[1];
     } else if (req.cookies.token) {
-      return req.cookies.token;
+      console.log("cook",req.cookies.token.split("=")[1]);
+      return req.cookies.token.split("=")[1];
     }
     return null;
   }
