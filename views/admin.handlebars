@@ -14,6 +14,7 @@
                 <th scope="col">Category</th>
                 <th scope="col">Summary</th>
                 <th scope="col">Status</th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
@@ -26,6 +27,9 @@
                 <td>{{this.ticketCategory}}</td>
                 <td>{{this.summary}}</td>
                 <td>{{this.status}}</td>
+                <td>
+                    <button data-id="{{this.id}}" class="closeTicket">Close</button>
+                </td>
             </tr>
             {{/each}}
         </tbody>
