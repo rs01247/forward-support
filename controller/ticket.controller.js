@@ -6,42 +6,53 @@ var router = express.Router();
 //POST REQUEST TO SAVE A NEW SERVICE TICKET AND ADD TO DB
 router.post("/api/user", function (req, res) {
     //get data from req.body 
-    var data = req.body;
-    var employeeName = data.employeeName;
-    var employeeDepartment = data.employeeDepartment;
-    var summary = data.summary;
-    var category = data.category;
-    var priority = data.ticketCategory;
-    var status = "open";
-    //validate if any of the data are empty then res.send(0)
-    if (employeeName === "" || employeeDepartment ==="" || summary ==="" || category ==="" || priority ==="") {
-        console.log("empty")
-      //do something here to tell the user there is an emplty data 
-    }
-else{
-    db.Ticket.create({
+    var data = {
         employeeName: req.body.employeeName,
-        summary: req.body.summary,
         employeeDepartment: req.body.employeeDepartment,
-        priority: req.body.priority,
-        ticketCategory: req.body.ticketCategory,
-        status: status
-    }).then(function (dbTicket) {
-       res.redirect("/user")
-      
-    })
-    // add catch error
-}
+        summary: req.body.summary,
+        category: req.body.category,
+        priority: req.body.ticketCategory,
+        status: "open"
+    }
+
+    if (data.employeeName === "" || data.employeeDepartment === "" || data.summary === "" || data.category === "" || data.priority === "") {
+        console.log("empty")
+        //do something here to tell the user there is an emplty data 
+        res.render("user", {
+            employeeName: req.body.employeeName,
+            employeeDepartment: req.body.employeeDepartment,
+            summary: req.body.summary,
+            category: req.body.category,
+            priority: req.body.ticketCategory,
+            message:"all fields should be filled"
+        })
+    }
+    else {
+        db.Ticket.create({
+            employeeName: req.body.employeeName,
+            summary: req.body.summary,
+            employeeDepartment: req.body.employeeDepartment,
+            priority: req.body.priority,
+            ticketCategory: req.body.ticketCategory,
+            status: "open"
+        }).then(function (dbTicket) {
+            res.redirect("/user")
+
+        })
+        // add catch error
+    }
 });
 
 
 router.get("/user", function (req, res) {
     // return the tickets that are not closed from database to the user 
-    db.Ticket.findAll({ where: {
-        status:"open"
-        //condition to show only the user tickets not all tickets
-      }}).then(function (dbTicket) {
-      res.render("user",{Ticket:dbTicket})
+    db.Ticket.findAll({
+        where: {
+            status: "open"
+            //condition to show only the user tickets not all tickets
+        }
+    }).then(function (dbTicket) {
+        res.render("user", { Ticket: dbTicket })
     })
 });
 
