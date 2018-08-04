@@ -1,39 +1,44 @@
 <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4 class="panel-title">Open Ticket List</h4>
-        </div>
-        <div class="panel-body" id="tableSection">
-        </div>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Ticket ID</th>
-                    <th scope="col">Employee Name</th>
-                    <th scope="col">Employee Department</th>
-                    <th scope="col">Priority</th>
-                    <th scope="col">Category</th>
-                    <th scope="col">Summary</th>
-                    <th scope="col">Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    
-                    <td>{{this.id}}</td>
-                    <td>{{this.employeeName}}</td>
-                    <td>{{this.employeeDepartment}}</td>
-                    <td>{{this.priority}}</td>
-                    <td>{{this.ticketCategory}}</td>
-                    <td>{{this.summary}}</td>
-                    <td>{{this.status}}</td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="panel-heading">
+        <h4 class="panel-title">Open Ticket List</h4>
     </div>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4 class="panel-title">Pending Ticket List</h4>
-        </div>
-        <div class="panel-body" id="waitlistSection">
-        </div>
+    <div class="panel-body" id="tableSection">
     </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Ticket ID</th>
+                <th scope="col">Employee Name</th>
+                <th scope="col">Employee Department</th>
+                <th scope="col">Priority</th>
+                <th scope="col">Category</th>
+                <th scope="col">Summary</th>
+                <th scope="col">Status</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each Ticket}}
+            <tr>
+                <td>{{this.id}}</td>
+                <td>{{this.employeeName}}</td>
+                <td>{{this.employeeDepartment}}</td>
+                <td>{{this.priority}}</td>
+                <td>{{this.ticketCategory}}</td>
+                <td>{{this.summary}}</td>
+                <td>{{this.status}}</td>
+                <td>
+                    <button data-id="{{this.id}}" class="closeTicket">Close</button>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">Pending Ticket List</h4>
+    </div>
+    <div class="panel-body" id="waitlistSection">
+    </div>
+</div>
