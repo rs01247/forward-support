@@ -1,52 +1,59 @@
+<h2>Open a Ticket</h2>
+<form action="/api/user" method="POST">
+    <div class="form-group">
+        <label for="exampleFormControlInput1">Employee Name</label>
+        <input name="employeeName" class="form-control" id="exampleFormControlInput1">
+    </div>
+    <div class="form-group">
+        <label for="exampleFormControlInput1">Employee Department:</label>
+        <input name="employeeDepartment" class="form-control" id="exampleFormControlInput1">
+    </div>
+    <div class="form-group">
+        <label for="exampleFormControlSelect1">Priority</label>
+        <select name="priority" class="form-control" id="exampleFormControlSelect1">
+            <option>Low</option>
+            <option>Medium</option>
+            <option>High</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="exampleFormControlSelect1">Category</label>
+        <select name="ticketCategory" class="form-control" id="exampleFormControlSelect1">
+            <option>Hardware</option>
+            <option>Software</option>
+            <option>Network</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="exampleFormControlTextarea1">Summary</label>
+        <textarea name="summary" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-primary " name="submit" type="submit">Submit</button>
+    </div>
+</form>
+
 <h1>Current Open Tickets</h1>
 <p>Manage your tickets</p>
 <ul>
-    hiiiii
-  {{#each Ticket}}
+    hiiiii {{#each Ticket}}
     <li>
-      <p><span class="label">ID:</span> {{id}}</p>
-      <p><span class="label">Employee Name:</span> {{employeeName}}</p>
-      <p><span class="label">Employee Department:</span> {{employeeDepartment}}</p>
-      <p><span class="label">Priority:</span> {{priority}}</p>
-      <p><span class="label">Category:</span> {{ticketCategory}}</p>
-      <p><span class="label">Summary:</span> {{summary}}</p>
-      <p><span class="label">Status:</span> {{status}}</p>
-      <button data-id="{{this.id}}" class="delquote">Delete</button>
-      <a href="/{{this.id}}">Update this ticket</a>
+        <p>
+            <span class="label">ID:</span> {{id}}</p>
+        <p>
+            <span class="label">Employee Name:</span> {{employeeName}}</p>
+        <p>
+            <span class="label">Employee Department:</span> {{employeeDepartment}}</p>
+        <p>
+            <span class="label">Priority:</span> {{priority}}</p>
+        <p>
+            <span class="label">Category:</span> {{ticketCategory}}</p>
+        <p>
+            <span class="label">Summary:</span> {{summary}}</p>
+        <p>
+            <span class="label">Status:</span> {{status}}</p>
+        <button data-id="{{this.id}}" class="closeTicket">Close</button>
+        <a href="/{{this.id}}">Update this ticket</a>
     </li>
-  {{/each}}
+    {{/each}}
 </ul>
-<h2>Open a Ticket</h2>
-                <form action="/api/user" method="POST">
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1">Employee Name</label>
-                        <input name="employeeName" class="form-control" id="exampleFormControlInput1">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1">Employee Department:</label>
-                        <input  name="employeeDepartment" class="form-control" id="exampleFormControlInput1">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleFormControlSelect1">Priority</label>
-                        <select name="priority" class="form-control" id="exampleFormControlSelect1">
-                            <option>Low</option>
-                            <option>Medium</option>
-                            <option>High</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleFormControlSelect1">Category</label>
-                        <select name="ticketCategory" class="form-control" id="exampleFormControlSelect1">
-                            <option>Hardware</option>
-                            <option>Software</option>
-                            <option>Network</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Summary</label>
-                        <textarea name="summary" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <button class="btn btn-primary " name="submit" type="submit">Submit</button>
-                    </div>
-                </form>
