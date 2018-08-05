@@ -2,6 +2,8 @@ var db = require("../models");
 var express = require("express");
 //use routers
 var router = express.Router();
+var Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 
 
@@ -17,6 +19,7 @@ router.post("/api/user", function (req, res) {
         category: req.body.category,
         priority: req.body.ticketCategory,
         status: "open"
+        
     }
 
     if (data.employeeName === "" || data.employeeDepartment === "" || data.summary === "" || data.category === "" || data.priority === "") {
@@ -38,7 +41,10 @@ router.post("/api/user", function (req, res) {
             employeeDepartment: req.body.employeeDepartment,
             priority: req.body.priority,
             ticketCategory: req.body.ticketCategory,
-            status: "open"
+            status: "open",
+            isOpen:true,
+            isInProgress:false
+
         }).then(function (dbTicket) {
             res.redirect("/api/user")
 
@@ -52,7 +58,9 @@ router.get("/api/user", function (req, res) {
     // return the tickets that are not closed from database to the user 
     db.Ticket.findAll({
         where: {
-            status: "open"
+            status: {
+                [Op.or]: ["open", "completed","inProgress"]
+              }
             //condition to show only the user tickets not all tickets
         }
     }).then(function (dbTicket) {
@@ -62,9 +70,12 @@ router.get("/api/user", function (req, res) {
 
 
 // UPDATE STATUS LEVEL FOR SERVICE TICKET
-router.put("api/user", function (req, res) {
+router.put("/api/user", function (req, res) {
+    console.log(req.body.status)
     db.Ticket.update({
-        status: req.body.status
+        status: req.body.status,
+        isOpen:req.body.isOpen,
+        isInProgress:req.body.isInProgress
     }, {
             where: {
                 id: req.body.id
@@ -77,8 +88,15 @@ router.put("api/user", function (req, res) {
 
 router.get('/api/admin', function (req, res) {
     //we need to retrieve tickets for the admin who still open and related to that admin 
-    res.render('admin', {
-        title: 'Support Ticket System'
+    db.Ticket.findAll({
+        where: {
+            status: {
+                [Op.or]: ["open", "inProgress"]
+              }
+            //condition to show only the user tickets not all tickets
+        }
+    }).then(function (dbTicket) {
+        res.render("admin", { Ticket: dbTicket })
     })
 });
 
