@@ -17,6 +17,11 @@ body {
     background-size: cover;
 }
 
+button:hover {
+  opacity: 1;
+  background-color: #3087b0;
+  color: white;
+}
 
 
 
@@ -39,7 +44,10 @@ body {
 
 @media (min-width: 1025px) and (max-width: 1280px) {
   
- 
+  .jumbotron {
+
+    background-size: 1025px 102px;
+};
   
 }
 
@@ -50,7 +58,10 @@ body {
 
 @media (min-width: 768px) and (max-width: 1024px) {
   
- 
+  .jumbotron {
+
+    background-size: 768px 76px;
+};
   
 }
 
@@ -60,8 +71,11 @@ body {
 */
 
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
-  
 
+  .jumbotron {
+
+    background-size: 768px 76px;
+};
   
 }
 
@@ -72,10 +86,12 @@ body {
 
 @media (min-width: 481px) and (max-width: 767px) {
   
-    .jumbotron {
-        background: url("Banner_v1.jpg");
-        background-size: 500px 100px;
-    }
+  .jumbotron {
+
+    background-size: 480px 48px;
+};
+
+  
   
 }
 
@@ -86,6 +102,9 @@ body {
 
 @media (min-width: 320px) and (max-width: 480px) {
   
-  
+  .jumbotron {
+
+    background-size: 320px 32px;
+};
   
 }
