@@ -3,8 +3,9 @@
         var token = window.localStorage.getItem("token");
         if(token) {
             axios({
-                url: "/api/protect",
+                url: "/api/user",
                 headers: {
+                    "key":"Content-Type","value":"application/json",
                     "Authorization": "Bearer " + token
                 }
             })
