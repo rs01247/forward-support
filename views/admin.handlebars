@@ -18,8 +18,7 @@
             </tr>
         </thead>
         <tbody>
-            {{#each Ticket}}
-           {{#if isOpen}}
+            {{#each Ticket}} {{#if isOpen}}
             <tr>
                 <td>{{this.id}}</td>
                 <td>{{this.employeeName}}</td>
@@ -29,12 +28,11 @@
                 <td>{{this.summary}}</td>
                 <td>{{this.status}}</td>
                 <td>
-                    <button data-id="{{this.id}}" class="changeToInProgress" > Change to In-Progress</button>
-                   
+                    <button data-id="{{this.id}}" class="changeToInProgress"> Change to In-Progress</button>
+
                 </td>
             </tr>
-            {{/if}}
-            {{/each}}
+            {{/if}} {{/each}}
         </tbody>
     </table>
 </div>
@@ -44,7 +42,7 @@
     </div>
     <div class="panel-body" id="waitlistSection">
     </div>
-     <table class="table">
+    <table class="table">
         <thead>
             <tr>
                 <th scope="col">Ticket ID</th>
@@ -58,22 +56,39 @@
             </tr>
         </thead>
         <tbody>
-            {{#each Ticket}}
-            {{#if isInProgress}}
+            {{#each Ticket}} {{#if isInProgress}}
             <tr>
                 <td>{{this.id}}</td>
                 <td>{{this.employeeName}}</td>
                 <td>{{this.employeeDepartment}}</td>
                 <td>{{this.priority}}</td>
                 <td>{{this.ticketCategory}}</td>
-                <td>{{this.summary}}</td>
+                <td>
+                    <button data-toggle="modal" data-target="#myModal">Click to Summary</button></td>
                 <td>{{this.status}}</td>
                 <td>
                     <button data-id="{{this.id}}" class="changeToComplete"> Change to Complete</button>
                 </td>
             </tr>
-            {{/if}}
-            {{/each}}
+            {{/if}} {{/each}}
         </tbody>
     </table>
+    {{#each Ticket}} {{#if isInProgress}}
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Ticket Summary</h4>
+                </div>
+                <div class="modal-body">
+                    <p>{{this.summary}}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/if}} {{/each}}
 </div>
