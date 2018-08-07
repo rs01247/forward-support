@@ -66,15 +66,20 @@ router.get("/api/user", function (req, res) {
     name=decoded.name;
     email=decoded.email;
     console.log(name)
+    console.log(email)
     }
     // return the tickets that are not closed from database to the user 
     db.Ticket.findAll({
-        where: {
+        where: 
+      //  [
+            {
             status: {
                 [Op.or]: ["open", "completed","inProgress"]
               }
             //condition to show only the user tickets not all tickets
         }
+    //     ,{employeeEmail:email}
+    // ]
 
     }).then(function (dbTicket) {
         res.render("user", { Ticket: dbTicket,employeeName:name,employeeEmail:email })
