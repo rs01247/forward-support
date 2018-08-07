@@ -4,6 +4,13 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: false
         },
+        employeeEmail:{
+            type:DataTypes.STRING,
+            validate: {
+                isEmail: true
+            },
+            allowNull: false
+        },
         summary: {
             type: DataTypes.TEXT,
             allowNull: false

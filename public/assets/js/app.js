@@ -15,7 +15,23 @@ $(document).ready(function () {
             .catch(function (err) {
                 console.error(err);
             })
+
     }
+    $("#logout").on("click", function (e) {
+        e.preventDefault();
+
+       // var token = window.localStorage.getItem("token");
+        window.localStorage.clear();
+       axios.get("/auth/logout").then(function(resp){
+            window.location.assign("/");
+       }) .catch(function (err) {
+        console.error(err);
+    })
+
+      
+       
+    })
+
     $("#submit-login").on("click", function (e) {
         e.preventDefault();
         axios.post("/auth/index", {
@@ -23,7 +39,7 @@ $(document).ready(function () {
             password: $("#password").val(),
         })
             .then(function (resp) {
-                console.log(resp)
+              //  console.log("hi"+resp.data.token)
                 window.localStorage.setItem("token", resp.data.token)
                 document.cookie += "token=" + resp.data.token;
                 window.location.assign("/api/user");
