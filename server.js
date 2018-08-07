@@ -4,7 +4,6 @@
  * secret: The JWT secret to encrypt our applications jwts
  */
 require("dotenv").config();
-
 var cookieParser = require('cookie-parser')
 var express = require('express');
 var exphbs = require('express-handlebars');
@@ -19,39 +18,30 @@ var db = require("./models");
 var app = express();
 var PORT = process.env.PORT || 3000;
 
-function maybe(fn) {
-  return function(req, res, next) {
-      if (req.headers.authorization) {
-        console.log("auth")
-        fn(req, res, next);
-      } else {
-        console.log("cook")
-         console.log(req.cookies);
-      }
-  }
-}
 
-// const auth = jwt({
-//   secret: process.env.JWT_SECRET,
-//   userProperty: 'payload',
-//   getToken: function fromHeaderOrCookie (req) {
-//     if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
-//       console.log("auth",req.headers.authorization.split(' ')[1]);
-//         return req.headers.authorization.split(' ')[1];
-//     } else if (req.cookies.token) {
-//       console.log("cook",req.cookies.token.split("=")[1]);
-//       return req.cookies.token.split("=")[1];
-//     }
-//     return null;
-//   }
-// });
+
+const auth = jwt({
+  secret: process.env.JWT_SECRET,
+  userProperty: 'payload',
+  getToken: function fromHeaderOrCookie (req) {
+    if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
+      console.log("auth",req.headers.authorization.split(' ')[1]);
+        return req.headers.authorization.split(' ')[1];
+    }
+     else if (req.cookies.token) {
+      console.log("cook",req.cookies.token.split("=")[1]);
+      return req.cookies.token.split("=")[1];
+    }
+    return null;
+  }
+});
 // ACCESS CSS, IMAGES, AND JS IN PUBLIC FOLDER
 app.use(express.static(__dirname + '/public'));
 
 // SET UP EXPRESS APP TO HANDLE BODY PARSING
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-//app.use(cookieParser())
+app.use(cookieParser())
 
 // HANDLEBARS
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
@@ -61,8 +51,8 @@ app.set("view engine", "handlebars");
 
 //ACCESS TO HTMLROUTES.JS AND APIROUTES.JS
 app.use(htmlRoutes);
-// app.use("/auth", authRoutes);
-// app.use(auth);
+app.use("/auth", authRoutes);
+app.use(auth);
 
 app.use(apiRoutes);
 

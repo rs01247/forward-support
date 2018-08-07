@@ -1,5 +1,7 @@
 var db = require("../models");
 var express = require("express");
+var jwt = require('express-jwt');
+var jwtDecode = require('jwt-decode');
 //use routers
 var router = express.Router();
 var Sequelize = require('sequelize');
@@ -7,22 +9,20 @@ const Op = Sequelize.Op;
 
 
 
-
-
-
 router.post("/api/user", function (req, res) {
     //get data from req.body 
+    console.log(req.body)
     var data = {
         employeeName: req.body.employeeName,
         employeeDepartment: req.body.employeeDepartment,
         summary: req.body.summary,
         category: req.body.category,
         priority: req.body.ticketCategory,
+        employeeEmail:req.body.employeeEmail,
         status: "open"
         
     }
-
-    if (data.employeeName === "" || data.employeeDepartment === "" || data.summary === "" || data.category === "" || data.priority === "") {
+    if (data.employeeName === "" || data.employeeDepartment === "" || data.summary === "" || data.category === "" || data.priority === "" || data.employeeEmail==="") {
         console.log("empty")
         //do something here to tell the user there is an emplty data 
         res.render("user", {
@@ -31,12 +31,14 @@ router.post("/api/user", function (req, res) {
             summary: req.body.summary,
             category: req.body.category,
             priority: req.body.ticketCategory,
+            employeeEmail:req.body.employeeEmail,
             message:"all fields should be filled"
         })
     }
     else {
         db.Ticket.create({
             employeeName: req.body.employeeName,
+            employeeEmail:req.body.employeeEmail,
             summary: req.body.summary,
             employeeDepartment: req.body.employeeDepartment,
             priority: req.body.priority,
@@ -54,7 +56,17 @@ router.post("/api/user", function (req, res) {
 });
 
 
-router.get("/api/user", function (req, res) {
+router.get("/api/user", function (req, res) { 
+   var name="";
+   var email="";
+    if(req.headers.authorization)
+    {
+    console.log(req.headers.authorization.split(" ")[1]);
+    var decoded = jwtDecode(req.headers.authorization.split(" ")[1]);
+    name=decoded.name;
+    email=decoded.email;
+    console.log(name)
+    }
     // return the tickets that are not closed from database to the user 
     db.Ticket.findAll({
         where: {
@@ -63,8 +75,9 @@ router.get("/api/user", function (req, res) {
               }
             //condition to show only the user tickets not all tickets
         }
+
     }).then(function (dbTicket) {
-        res.render("user", { Ticket: dbTicket })
+        res.render("user", { Ticket: dbTicket,employeeName:name,employeeEmail:email })
     })
 });
 

@@ -5,17 +5,34 @@ var router = express.Router();
 var helpers = require("./helpers/auth.helpers");
 var routeHelpers = require("./helpers/route.helper");
 
+
+router.get('/logout', function(req, res){
+    //remove token from cookie (clear cookies)
+    cookie = req.cookies;
+    for (var prop in cookie) {
+        if (!cookie.hasOwnProperty(prop)) {
+            continue;
+        }    
+        res.cookie(prop, '', {expires: new Date(0)});
+    }
+    res.redirect('/');
+});
+
+
+
 router.post("/index", function (req, res) {
     var user = {
         email: req.body.email,
         password: req.body.password
     }
+   console.log("hi")
     models.User.findOne({
         where: {
             email: user.email
         }
     })
         .then(function (resp) {
+          
             if (helpers.checkIfValidPass(resp, user.password)) {
                 var expiry = new Date();
                 expiry.setDate(expiry.getDate() + 7);
