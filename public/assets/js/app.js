@@ -42,7 +42,9 @@ $(document).ready(function () {
               //  console.log("hi"+resp.data.token)
                 window.localStorage.setItem("token", resp.data.token)
                 document.cookie += "token=" + resp.data.token;
-                window.location.assign("/api/user");
+                // var decoded = jwtDecode(resp.data.token.split(" ")[1]);
+                // console.log(decoded)
+               window.location.assign("/api/user");
             })
             .catch(function (err) {
                 console.error(err);
@@ -54,6 +56,7 @@ $(document).ready(function () {
             email: $("#email").val(),
             password: $("#password").val(),
             name: $("#name").val(),
+            role:$("#role").val()
         })
             .then(function (resp) {
                 console.log(resp)
