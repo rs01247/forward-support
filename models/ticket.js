@@ -14,7 +14,7 @@ module.exports = function (sequelize, DataTypes) {
         },
         priority:
         {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             allowNull: false
         },
         ticketCategory:
