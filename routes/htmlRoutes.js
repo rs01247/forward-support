@@ -5,7 +5,7 @@ var router = express.Router();
 
 router.get('/', function (req, res) {
     res.render('index', {
-        title: 'Support Ticket System'
+        // title: 'Support Ticket System'
     })
 });
 
