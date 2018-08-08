@@ -29,6 +29,7 @@ const auth = jwt({
         return req.headers.authorization.split(' ')[1];
     }
      else if (req.cookies.token) {
+       console.log("cook", req.cookies.token)
       return req.cookies.token
     }
     return null;

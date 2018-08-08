@@ -1,97 +1,117 @@
- <div class="row">
-       <div class="col-md-8 offset-sm-2">
- 
- <button class="btn btn-lg btn-primary text-uppercase" id = "logout">logout</button>
- <h2 class="text-danger">{{message}}</h2>
-<h2>Open a Ticket</h2>
-
-
- 
-<form action="/api/user" method="POST">
-
-    <div class="form-group">
-        <label for="exampleFormControlInput1">Employee Name</label>
-        <input name="employeeName" class="form-control" id="exampleFormControlInput1" value="{{employeeName}}">
-    </div>
-     <div class="form-group">
-        <label for="exampleFormControlInput1">Employee Email</label>
-        <input name="employeeEmail" class="form-control" id="exampleFormControlInput1" value="{{employeeEmail}}">
-    </div>
-    <div class="form-group">
-        <label for="exampleFormControlInput1">Employee Department:</label>
-        <input name="employeeDepartment" class="form-control" id="exampleFormControlInput1" value="{{employeeDepartment}}">
-    </div>
-    <div class="form-group">
-        <label for="exampleFormControlSelect1">Priority</label>
-        <select name="priority" class="form-control" id="exampleFormControlSelect1">
-            <option>Low</option>
-            <option>Medium</option>
-            <option>High</option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="exampleFormControlSelect1">Category</label>
-        <select name="ticketCategory" class="form-control" id="exampleFormControlSelect1">
-            <option>Hardware</option>
-            <option>Software</option>
-            <option>Network</option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="exampleFormControlTextarea1">Summary</label>
-        <textarea name="summary" class="form-control" id="exampleFormControlTextarea1" rows="3">{{summary}}</textarea>
-    </div>
-    <div class="form-group">
-        <button class="btn btn-primary " id="ticketSubmit" name="submit" type="submit">Submit</button>
-    </div>
-
-</form>
-
-
 <div class="row">
-    <div class="col-lg-12">
+    <div class="col-md-8 offset-sm-2">
 
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h1>Current Open Tickets</h1>
+        <button class="btn btn-lg btn-primary text-uppercase" id="logout">logout</button>
+        <h2 class="text-danger">{{message}}</h2>
+        <h2>Open a Ticket</h2>
 
-                <p>Manage your tickets</p>
+
+
+        <form action="/api/user" method="POST">
+
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Employee Name</label>
+                <input name="employeeName" class="form-control" id="exampleFormControlInput1" value="{{employeeName}}">
             </div>
-            <div class="panel-body" id="tableSection">
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Employee Email</label>
+                <input name="employeeEmail" class="form-control" id="exampleFormControlInput1" value="{{employeeEmail}}">
             </div>
-            <table class="table table-responsive">
-                <thead>
-                    <tr>
-                        <th scope="col">Ticket ID</th>
-                        <th scope="col">Employee Name</th>
-                        <th scope="col">Employee Department</th>
-                        <th scope="col">Priority</th>
-                        <th scope="col">Category</th>
-                        <th scope="col">Summary</th>
-                        <th scope="col">Status</th>
-                        <th scope="col"></th>
-                    </tr>
-                </thead>
-                <tbody>
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Employee Department:</label>
+                <input name="employeeDepartment" class="form-control" id="exampleFormControlInput1" value="{{employeeDepartment}}">
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">Priority</label>
+                <select name="priority" class="form-control" id="exampleFormControlSelect1">
+                    <option>Low</option>
+                    <option>Medium</option>
+                    <option>High</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">Category</label>
+                <select name="ticketCategory" class="form-control" id="exampleFormControlSelect1">
+                    <option>Hardware</option>
+                    <option>Software</option>
+                    <option>Network</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">Summary</label>
+                <textarea name="summary" class="form-control" id="exampleFormControlTextarea1" rows="3">{{summary}}</textarea>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary " id="ticketSubmit" name="submit" type="submit">Submit</button>
+            </div>
+
+        </form>
+
+
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h1>Current Open Tickets</h1>
+
+                        <p>Manage your tickets</p>
+                    </div>
+                    <div class="panel-body" id="tableSection">
+                    </div>
+                    <table class="table table-responsive">
+                        <thead>
+                            <tr>
+                                <th scope="col">Ticket ID</th>
+                                <th scope="col">Employee Name</th>
+                                <th scope="col">Employee Department</th>
+                                <th scope="col">Priority</th>
+                                <th scope="col">Category</th>
+                                <th scope="col">Summary</th>
+                                <th scope="col">Status</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each Ticket}}
+                            <tr>
+                                <td>{{this.id}}</td>
+                                <td>{{this.employeeName}}</td>
+                                <td>{{this.employeeDepartment}}</td>
+                                <td>{{this.priority}}</td>
+                                <td>{{this.ticketCategory}}</td>
+                                <td>
+                                    <button data-toggle="modal" data-target="#myModal">Click to Summary</button>
+                                </td>
+                                <td>{{this.status}}</td>
+                                <td>
+                                    <button data-id="{{this.id}}" class="closeTicket">Close</button>
+                                </td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
                     {{#each Ticket}}
-                    <tr>
-                        <td>{{this.id}}</td>
-                        <td>{{this.employeeName}}</td>
-                        <td>{{this.employeeDepartment}}</td>
-                        <td>{{this.priority}}</td>
-                        <td>{{this.ticketCategory}}</td>
-                        <td>{{this.summary}}</td>
-                        <td>{{this.status}}</td>
-                        <td>
-                            <button data-id="{{this.id}}" class="closeTicket">Close</button>
-                        </td>
-                    </tr>
+                    <div class="modal fade" id="myModal" role="dialog">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h3 class="modal-title">Ticket Summary</h3>
+                                </div>
+                                <div class="modal-body">
+                                    <p>{{this.summary}}</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     {{/each}}
-                </tbody>
-            </table>
-        </div>
+                </div>
 
+            </div>
+        </div>
     </div>
-</div>
-</div>
 </div>

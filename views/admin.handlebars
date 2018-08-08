@@ -1,103 +1,107 @@
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <h4 class="panel-title">Open Ticket List</h4>
-    </div>
-    <div class="panel-body" id="tableSection">
-    </div>
-    <table class="table table-bordered table-responsive">
-        <thead>
-            <tr>
-                <th scope="col">Ticket ID</th>
-                <th scope="col">Employee Name</th>
-                 <th scope="col">Employee Email</th>
-                <th scope="col">Employee Department</th>
-                <th scope="col">Priority</th>
-                <th scope="col">Category</th>
-                <th scope="col">Summary</th>
-                <th scope="col">Status</th>
-                <th scope="col"></th>
-            </tr>
-        </thead>
-        <tbody>
-            {{#each Ticket}} {{#if isOpen}}
-            <tr>
-                <td>{{this.id}}</td>
-                <td>{{this.employeeName}}</td>
-                <td>{{this.employeeEmail}}</td>
-                <td>{{this.employeeDepartment}}</td>
-                <td>{{this.priority}}</td>
-                <td>{{this.ticketCategory}}</td>
-                <td>
-                    <button data-toggle="modal" data-target="#myModal">Click to Summary</button>
-                </td>
-                <td>{{this.status}}</td>
-                <td>
-                    <button data-id="{{this.id}}" class="changeToInProgress"> Change to In-Progress</button>
+<div class="row">
+    <div class="col-md-8 offset-sm-2">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">Open Ticket List</h4>
+            </div>
+            <div class="panel-body" id="tableSection">
+            </div>
+            <table class="table table-bordered table-responsive">
+                <thead>
+                    <tr>
+                        <th scope="col">Ticket ID</th>
+                        <th scope="col">Employee Name</th>
+                        <th scope="col">Employee Email</th>
+                        <th scope="col">Employee Department</th>
+                        <th scope="col">Priority</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Summary</th>
+                        <th scope="col">Status</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each Ticket}} {{#if isOpen}}
+                    <tr>
+                        <td>{{this.id}}</td>
+                        <td>{{this.employeeName}}</td>
+                        <td>{{this.employeeEmail}}</td>
+                        <td>{{this.employeeDepartment}}</td>
+                        <td>{{this.priority}}</td>
+                        <td>{{this.ticketCategory}}</td>
+                        <td>
+                            <button data-toggle="modal" data-target="#myModal">Click to Summary</button>
+                        </td>
+                        <td>{{this.status}}</td>
+                        <td>
+                            <button data-id="{{this.id}}" class="changeToInProgress"> Change to In-Progress</button>
 
-                </td>
-            </tr>
-            {{/if}} {{/each}}
-        </tbody>
-    </table>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <h4 class="panel-title">In-Progress Ticket List</h4>
-    </div>
-    <div class="panel-body" id="waitlistSection">
-    </div>
-    <table class="table table-bordered table-responsive">
-        <thead>
-            <tr>
-                <th scope="col">Ticket ID</th>
-                <th scope="col">Employee Name</th>
-                <th scope="col">Employee Email</th>
-                <th scope="col">Employee Department</th>
-                <th scope="col">Priority</th>
-                <th scope="col">Category</th>
-                <th scope="col">Summary</th>
-                <th scope="col">Status</th>
-                <th scope="col"></th>
-            </tr>
-        </thead>
-        <tbody>
-            {{#each Ticket}} {{#if isInProgress}}
-            <tr>
-                <td>{{this.id}}</td>
-                <td>{{this.employeeName}}</td>
-                <td>{{this.employeeEmail}}</td>
-                <td>{{this.employeeDepartment}}</td>
-                <td>{{this.priority}}</td>
-                <td>{{this.ticketCategory}}</td>
-                <td>
-                    <button data-toggle="modal" data-target="#myModal">Click to Summary</button>
-                </td>
-                <td>{{this.status}}</td>
-                <td>
-                    <button data-id="{{this.id}}" class="changeToComplete"> Change to Complete</button>
-                </td>
-            </tr>
-            {{/if}} {{/each}}
-        </tbody>
-    </table>
+                        </td>
+                    </tr>
+                    {{/if}} {{/each}}
+                </tbody>
+            </table>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">In-Progress Ticket List</h4>
+            </div>
+            <div class="panel-body" id="waitlistSection">
+            </div>
+            <table class="table table-bordered table-responsive1">
+                <thead>
+                    <tr>
+                        <th scope="col">Ticket ID</th>
+                        <th scope="col">Employee Name</th>
+                        <th scope="col">Employee Email</th>
+                        <th scope="col">Employee Department</th>
+                        <th scope="col">Priority</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Summary</th>
+                        <th scope="col">Status</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each Ticket}} {{#if isInProgress}}
+                    <tr>
+                        <td>{{this.id}}</td>
+                        <td>{{this.employeeName}}</td>
+                        <td>{{this.employeeEmail}}</td>
+                        <td>{{this.employeeDepartment}}</td>
+                        <td>{{this.priority}}</td>
+                        <td>{{this.ticketCategory}}</td>
+                        <td>
+                            <button data-toggle="modal" data-target="#myModal">Click to Summary</button>
+                        </td>
+                        <td>{{this.status}}</td>
+                        <td>
+                            <button data-id="{{this.id}}" class="changeToComplete"> Change to Complete</button>
+                        </td>
+                    </tr>
+                    {{/if}} {{/each}}
+                </tbody>
+            </table>
 
-    {{#each Ticket}}
-    <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h3 class="modal-title">Ticket Summary</h3>
-                </div>
-                <div class="modal-body">
-                    <p>{{this.summary}}</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            {{#each Ticket}}
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h3 class="modal-title">Ticket Summary</h3>
+                        </div>
+                        <div class="modal-body">
+                            <p>{{this.summary}}</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
                 </div>
             </div>
+            {{/each}}
+
         </div>
     </div>
-    {{/each}}
-
 </div>
