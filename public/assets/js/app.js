@@ -1,4 +1,63 @@
-
+function getCookie(name) {
+    var value = "; " + document.cookie;
+    var parts = value.split("; " + name + "=");
+    if (parts.length == 2) return parts.pop().split(";").shift();
+  }
+  function deleteCookie( name, path, domain ) {
+    if( getCookie( name ) ) {
+      document.cookie = name + "=" +
+        ((path) ? ";path="+path:"")+
+        ((domain)?";domain="+domain:"") +
+        ";expires=Thu, 01 Jan 1970 00:00:01 GMT";
+    }
+  }
+function parseJwt (token) {
+    var base64Url = token.split('.')[1];
+    var base64 = base64Url.replace('-', '+').replace('_', '/');
+    return JSON.parse(window.atob(base64));
+};
+function isExpired() {
+    if(isLoggedIn()) {
+        var storageToken = localStorage.getItem("token");
+        var cookieToken = getCookie("token")
+        if(storageToken) {
+            return parseJwt(storageToken).exp > Date.now / 1000;
+        }
+        else if(cookieToken) {
+            return parseJwt(cookieToken).exp > Date.now / 1000;
+        }
+        
+    }
+    else {
+        return true;
+    }
+}
+function removeAuthTokens() {
+    deleteCookie("token", "/", "");
+    console.log("removing")
+    localStorage.removeItem("token");
+}
+function isLoggedIn() {
+    if(localStorage.getItem("token") || getCookie("token")) {
+        return true
+    }
+    else {
+        return false;
+    }
+}
+function handlePageAuth() {
+    console.log(window.location.pathname)
+    if(window.location.pathname === "/" || window.location.pathname === "/register" ) {
+        if (isLoggedIn()){
+       window.location.assign("/api/user")}
+    }
+    else if(isExpired()) {
+        console.log("exp")
+        window.location.assign("/")
+        removeAuthTokens();
+    }   
+}
+handlePageAuth();
 $(document).ready(function () {
     var token = window.localStorage.getItem("token");
     if (token) {
@@ -19,18 +78,10 @@ $(document).ready(function () {
     }
     $("#logout").on("click", function (e) {
         e.preventDefault();
-
-       // var token = window.localStorage.getItem("token");
-        window.localStorage.clear();
-       axios.get("/auth/logout").then(function(resp){
-            window.location.assign("/");
-       }) .catch(function (err) {
-        console.error(err);
+        removeAuthTokens();
+        window.location.assign("/");
     })
 
-      
-       
-    })
 
     $("#submit-login").on("click", function (e) {
         e.preventDefault();
@@ -44,12 +95,17 @@ $(document).ready(function () {
                 document.cookie += "token=" + resp.data.token;
                 // var decoded = jwtDecode(resp.data.token.split(" ")[1]);
                 // console.log(decoded)
-               window.location.assign("/api/user");
+              console.log(parseJwt(resp.data.token)) 
+               window.location = "/api/user";
             })
             .catch(function (err) {
                 console.error(err);
             })
     })
+
+  
+
+
     $("#submit").on("click", function (e) {
         e.preventDefault();
         axios.post("/auth/register", {
