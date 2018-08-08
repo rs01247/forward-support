@@ -41,11 +41,29 @@ button:hover {
 #jumbo {
   margin: auto;
    width: 50%;
-   padding: 10px;
+ }
+
+#signIn {
+  font-size: 21px;
 }
 
+#register {
+  font-size: 21px;
+}
 
+#formFont {
+  font-size: 15px;
 
+}
+
+#logo1 {
+  margin: auto;
+   width: 50%;
+ }
+
+.logo2{
+  display: none;
+}
 
 /* 
   ##Device = Desktops
@@ -64,11 +82,39 @@ button:hover {
 
 @media (min-width: 1025px) and (max-width: 1280px) {
   
-  .jumbotron {
-
-    background-size: 1025px 102px;
-};
+  .col-lg-12 {
+    width: 100%;
+  };
   
+  .homeNav {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    border: 1px solid #ddd;
+  }
+  .logo1{
+    display: block;
+    margin: auto;
+    width: 50%;
+  }
+  
+  .logo2{
+    display: none;
+    margin: auto;
+    width: 50%;
+     
+  }
+  .table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    border: 1px solid #ddd;
+  }
+
 }
 
 /* 
@@ -78,16 +124,39 @@ button:hover {
 
 @media (min-width: 768px) and (max-width: 1024px) {
   
-  .jumbotron {
-    background: url("../images/Banner_v1.jpg");
-    background-size: 500px 76px;
-};
-
-.col-lg-12 {
-  width: 50%;
-};
-
+  .col-lg-12 {
+    width: 100%;
+  };
   
+  .homeNav {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    border: 1px solid #ddd;
+  }
+  .logo1{
+    display: block;
+    margin: auto;
+    width: 50%;
+  }
+  
+  .logo2{
+    display: none;
+    margin: auto;
+    width: 50%;
+     
+  }
+  .table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    border: 1px solid #ddd;
+  }
+
 }
 
 /* 
@@ -97,15 +166,39 @@ button:hover {
 
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
 
-  #jumbo {
-
-    background-size: 300px 76px;
-};
-
-.col-lg-12 {
-  width: 50%;
-};
+  .col-lg-12 {
+    width: 100%;
+  };
   
+  .homeNav {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    border: 1px solid #ddd;
+  }
+  .logo1{
+    display: block;
+    margin: auto;
+    width: 50%;
+  }
+  
+  .logo2{
+    display: none;
+    margin: auto;
+    width: 50%;
+     
+  }
+  .table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    border: 1px solid #ddd;
+  }
+
 }
 
 /* 
@@ -114,11 +207,6 @@ button:hover {
 */
 
 @media (min-width: 481px) and (max-width: 767px) {
-  
-  .jumbotron {
-
-    background-size: 200px 48px;
-};
 
 .col-lg-12 {
   width: 100%;
@@ -132,7 +220,26 @@ button:hover {
   -ms-overflow-style: -ms-autohiding-scrollbar;
   border: 1px solid #ddd;
 }
-  
+.logo1{
+  display: none;
+  margin: auto;
+  width: 50%;
+}
+
+.logo2{
+  display: block;
+  margin: auto;
+  width: 50%;
+   
+}
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  border: 1px solid #ddd;
+}
   
 }
 
@@ -141,13 +248,40 @@ button:hover {
   ##Screen = B/w 320px to 479px
 */
 
-@media (min-width: 320px) and (max-width: 480px) {
+@media (min-width: 1px) and (max-width: 480px) {
   
-  .jumbotron {
-
-    background-size: 100px 32px;
-};
 .col-lg-12 {
-  width: 20%;
+  width: 100%;
 };
+
+.homeNav {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  border: 1px solid #ddd;
+}
+.logo1{
+  display: none;
+  margin: auto;
+  width: 50%;
+}
+
+.logo2{
+  display: block;
+  margin: auto;
+  width: 50%;
+   
+}
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  border: 1px solid #ddd;
+}
+
+
 }
