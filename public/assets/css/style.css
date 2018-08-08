@@ -1,7 +1,3 @@
-.jumbotron {
-    background: url("../images/Banner_v1.jpg");
-    background-size: 1105px 114px;
-}
 
 #navLogo {
   height: 40px;
@@ -15,7 +11,7 @@ body {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    font-family: 'Orbitron', sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 button:hover {
@@ -37,6 +33,15 @@ button:hover {
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: -ms-autohiding-scrollbar;
   border: 1px solid #ddd;
+}
+
+
+
+
+#jumbo {
+  margin: auto;
+   width: 50%;
+   padding: 10px;
 }
 
 
@@ -92,7 +97,7 @@ button:hover {
 
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
 
-  .jumbotron {
+  #jumbo {
 
     background-size: 300px 76px;
 };
@@ -118,6 +123,15 @@ button:hover {
 .col-lg-12 {
   width: 100%;
 };
+
+.homeNav {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  border: 1px solid #ddd;
+}
   
   
 }
