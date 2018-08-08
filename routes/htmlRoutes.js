@@ -1,4 +1,3 @@
-var db = require("../models");
 var express = require("express");
 //use routers
 var router = express.Router();

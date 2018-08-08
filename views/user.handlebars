@@ -1,17 +1,17 @@
- <button class="btn btn-lg btn-primary text-uppercase" id = "logout">logout</button>
- <h2 class="text-danger">{{message}}</h2>
+<button class="btn btn-lg btn-primary text-uppercase" id="logout">logout</button>
+<h2 class="text-danger">{{message}}</h2>
 <h2>Open a Ticket</h2>
 <p>{{name}}</p>
 <p>{{email}}</p>
 
- 
+
 <form action="/api/user" method="POST">
 
     <div class="form-group">
         <label for="exampleFormControlInput1">Employee Name</label>
         <input name="employeeName" class="form-control" id="exampleFormControlInput1" value="{{employeeName}}">
     </div>
-     <div class="form-group">
+    <div class="form-group">
         <label for="exampleFormControlInput1">Employee Email</label>
         <input name="employeeEmail" class="form-control" id="exampleFormControlInput1" value="{{employeeEmail}}">
     </div>
