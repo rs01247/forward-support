@@ -43,7 +43,6 @@ router.post("/index", function (req, res) {
                         userID: resp.id,
                         name: resp.name,
                         email: resp.email,
-                        role:resp.role,
                         scaryStuff: "OOGA BOOOGA"
                     }, process.env.JWT_SECRET)
                 });

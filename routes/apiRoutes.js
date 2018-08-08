@@ -6,7 +6,9 @@ var jwtDecode = require('jwt-decode');
 var router = express.Router();
 var Sequelize = require('sequelize');
 const Op = Sequelize.Op;
-
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+const emailer = require('./helpers/email.helpers')
 
 
 router.post("/api/user", function (req, res) {
@@ -47,7 +49,15 @@ router.post("/api/user", function (req, res) {
             isOpen:true,
             isInProgress:false
 
+            //send email from the system to the admin 
         }).then(function (dbTicket) {
+            sgMail.send(emailer.openMail)
+            .then(function () {
+                console.log("done");
+            })
+            .catch(function (err) {
+                console.error(err);
+            })
             res.redirect("/api/user")
 
         })
@@ -55,10 +65,11 @@ router.post("/api/user", function (req, res) {
     }
 });
 
+var name="";
+var email="";
+
 
 router.get("/api/user", function (req, res) { 
-   var name="";
-   var email="";
     if(req.headers.authorization)
     {
     console.log(req.headers.authorization.split(" ")[1]);
@@ -82,7 +93,7 @@ router.get("/api/user", function (req, res) {
     // ]
 
     }).then(function (dbTicket) {
-        res.render("user", { Ticket: dbTicket,employeeName:name,employeeEmail:email })
+        res.render("user", { Ticket: dbTicket, employeeName: name, employeeEmail: email })
     })
 });
 
