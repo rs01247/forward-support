@@ -9,20 +9,20 @@ Users submit a ticket via the main page. From a drop down menu they can choose t
 * Network
 * Hardware
 
-The user will add a brief description of the issue. An email confirmation will be sent out to them, nothing the ticket status. 
+The user will add a brief description of the issue. An email confirmation will be sent out to them, with the ticket status. 
 
-The status of a ticket will be one of the following:
+The status of a ticket will be listed as follows:
 
 * Open
 * In Progress
 * Complete
 * Closed
 
-Each status change generates an email with a notation of the current status.
+Each status change generates an email with a notation of the current status change.
 
-ONLY the Admin user can update or change a status.
+ONLY the Admin user can update, change a status, or assign a ticket to a department.
 
-The Admin role will see all the current tickets that are live and what the actual status is. The Admin will see the following:
+The Admin role will see all the current tickets that are currently live and what the actual status is. The Admin will see the following:
 
 * User who submitted ticket
 * Type of issue
