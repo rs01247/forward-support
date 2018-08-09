@@ -47,6 +47,24 @@ function isLoggedIn() {
 }
 function handlePageAuth() {
     console.log(window.location.pathname)
+    if(window.location.pathname === "/api/admin")
+    {
+        var token = localStorage.getItem("token");
+       if( parseJwt(token).role ==="Employee")
+       {
+        window.location.assign("/api/user")
+       }
+
+    }
+    if(window.location.pathname === "/api/user")
+    {
+        var token = localStorage.getItem("token");
+       if( parseJwt(token).role !=="Employee")
+       {
+        window.location.assign("/api/admin")
+       }
+
+    }
     if(window.location.pathname === "/" || window.location.pathname === "/register" ) {
         if (isLoggedIn()){
        window.location.assign("/api/user")}
@@ -93,10 +111,13 @@ $(document).ready(function () {
               //  console.log("hi"+resp.data.token)
                 window.localStorage.setItem("token", resp.data.token)
                 document.cookie += "token=" + resp.data.token;
-                // var decoded = jwtDecode(resp.data.token.split(" ")[1]);
-                // console.log(decoded)
-              console.log(parseJwt(resp.data.token)) 
+           if(parseJwt(resp.data.token).role === "Employee")
+           {
                window.location = "/api/user";
+           }
+           else{
+            window.location = "/api/admin";
+           }
             })
             .catch(function (err) {
                 console.error(err);

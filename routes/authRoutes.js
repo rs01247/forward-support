@@ -36,12 +36,13 @@ router.post("/index", function (req, res) {
             if (helpers.checkIfValidPass(resp, user.password)) {
                 var expiry = new Date();
                 expiry.setDate(expiry.getDate() + 7);
-
+console.log("hhhhhhhhhhhhhhhhh"+resp.role)
                 res.json({
                     token: jwt.sign({
                         exp: parseInt(expiry.getTime() / 1000),
                         userID: resp.id,
                         name: resp.name,
+                        role:resp.role,
                         email: resp.email,
                         scaryStuff: "OOGA BOOOGA"
                     }, process.env.JWT_SECRET)
