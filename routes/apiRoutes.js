@@ -102,7 +102,7 @@ router.get("/api/user", function (req, res) {
 
 // UPDATE STATUS LEVEL FOR SERVICE TICKET
 router.put("/api/user", function (req, res) {
-    console.log(req.body.status)
+    
     db.Ticket.update({
         status: req.body.status,
         isOpen:req.body.isOpen,
@@ -112,6 +112,8 @@ router.put("/api/user", function (req, res) {
                 id: req.body.id
             }
         }).then(function (dbTicket) {
+           console.log("newwwwwwwwwwwwwwwwwwwwww"+req.body.status)
+           console.log(req.body.email)
             res.json(dbTicket);
         })
 })
