@@ -5,13 +5,13 @@ var router = express.Router();
 
 router.get('/', function (req, res) {
     res.render('index', {
-        // title: 'Support Ticket System'
+        title: 'Welcome to Forward Support'
     })
 });
 
 router.get('/register', function (req, res) {
     res.render('register', {
-        title: 'Support Ticket System'
+        title: 'Register Account'
     })
 });
 

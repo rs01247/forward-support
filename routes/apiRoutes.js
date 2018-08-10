@@ -95,7 +95,12 @@ router.get("/api/user", function (req, res) {
             ]
 
     }).then(function (dbTicket) {
-        res.render("user", { Ticket: dbTicket, employeeName: name, employeeEmail: email })
+        res.render("user", { 
+            Ticket: dbTicket, 
+            employeeName: name, 
+            employeeEmail: email,
+            title: `${name}'s Tickets`
+        })
     })
 });
 
@@ -160,7 +165,10 @@ router.get('/api/admin', function (req, res) {
             //condition to show only the user tickets not all tickets
         }
     }).then(function (dbTicket) {
-        res.render("admin", { Ticket: dbTicket })
+        res.render("admin", { 
+            Ticket: dbTicket,
+            ticket: 'Admin Page' 
+        })
     })
 });
 
@@ -177,9 +185,6 @@ router.put("api/user", function (req, res) {
             res.json(dbTicket);
         })
 });
-
-
-
 
 
 
