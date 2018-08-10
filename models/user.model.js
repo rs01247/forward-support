@@ -9,7 +9,7 @@ module.exports = function (sequelize, DataTypes) {
             // }
         },
         name: DataTypes.STRING,
-        role:DataTypes.STRING,
+        role: DataTypes.STRING,
         salt: DataTypes.STRING,
         hash: DataTypes.STRING
     });

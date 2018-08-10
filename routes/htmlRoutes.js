@@ -1,5 +1,5 @@
-var db = require("../models");
 var express = require("express");
+
 //use routers
 var router = express.Router();
 
@@ -14,7 +14,6 @@ router.get('/register', function (req, res) {
         title: 'Support Ticket System'
     })
 });
-
 
 
 module.exports = router;

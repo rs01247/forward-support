@@ -12,4 +12,4 @@ module.exports = {
             message: err.toString()
         });
     }
-}
+};

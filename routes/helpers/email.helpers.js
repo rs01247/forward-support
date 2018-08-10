@@ -1,14 +1,14 @@
 // EMAILS BEING SENT OUT FOR SUPPORT TICKET STATUSES
 const emailer = {
     openMail: {
-        to: 't.bakeer4@gmail.com',
+        to: 'sammyad2018@gmail.com',
         from: 'forwardsup1247@gmail.com',
         subject: 'Ticket Has Been Created',
         text: 'Ticket has been created by Employee. Please address concern ASAP. Thank you',
         html: '<strong>Ticket has been created by Employee. Please address concern ASAP. Thank you</strong>',
     },
     inProgressMail: {
-        //to: '',
+        to: '',
         from: 'forwardsup1247@gmail.com',
         subject: 'Your Ticket is in Progress',
         text: 'Your ticket is now in progress!!! We will update you as soon as a solution is found. -Forward Support',
@@ -28,5 +28,6 @@ const emailer = {
         text: 'Your ticket has been closed. Thank you so much for contacting us. If any other issues arise, do not hesitate to contact us again. -Forward Support',
         html: '<strong>Your ticket has been closed. Thank you so much for contacting us. If any other issues arise, do not hesitate to contact us again. -Forward Support</strong>',
     }
-}
+};
+
 module.exports = emailer;
