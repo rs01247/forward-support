@@ -71,14 +71,15 @@ var email = "";
 
 
 router.get("/api/user", function (req, res) {
-    if (req.headers.authorization) {
-        console.log(req.headers.authorization.split(" ")[1]);
-        var decoded = jwtDecode(req.headers.authorization.split(" ")[1]);
+ console.log("cccccccccccccccccccccccccc"+req.cookies.token);
+    // if (req.headers.authorization) {
+    //     console.log(req.headers.authorization.split(" ")[1]);
+        var decoded = jwtDecode(req.cookies.token);
         name = decoded.name;
         email = decoded.email;
         console.log(name)
         console.log(email)
-    }
+   // }
     // return the tickets that are not closed from database to the user 
     db.Ticket.findAll({
         where:
@@ -174,17 +175,17 @@ router.get('/api/admin', function (req, res) {
 
 
 // UPDATE PRIOIRTY LEVEL (ESCALATION)
-router.put("api/user", function (req, res) {
-    db.Ticket.update({
-        priority: req.body.priority
-    }, {
-            where: {
-                id: req.body.id
-            }
-        }).then(function (dbTicket) {
-            res.json(dbTicket);
-        })
-});
+// router.put("api/user", function (req, res) {
+//     db.Ticket.update({
+//         priority: req.body.priority
+//     }, {
+//             where: {
+//                 id: req.body.id
+//             }
+//         }).then(function (dbTicket) {
+//             res.json(dbTicket);
+//         })
+// });
 
 
 
