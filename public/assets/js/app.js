@@ -2,79 +2,83 @@ function getCookie(name) {
     var value = "; " + document.cookie;
     var parts = value.split("; " + name + "=");
     if (parts.length == 2) return parts.pop().split(";").shift();
-  }
-  function deleteCookie( name, path, domain ) {
-    if( getCookie( name ) ) {
-      document.cookie = name + "=" +
-        ((path) ? ";path="+path:"")+
-        ((domain)?";domain="+domain:"") +
-        ";expires=Thu, 01 Jan 1970 00:00:01 GMT";
+};
+
+function deleteCookie(name, path, domain) {
+    if (getCookie(name)) {
+        document.cookie = name + "=" +
+            ((path) ? ";path=" + path : "") +
+            ((domain) ? ";domain=" + domain : "") +
+            ";expires=Thu, 01 Jan 1970 00:00:01 GMT";
     }
-  }
-function parseJwt (token) {
+};
+
+function parseJwt(token) {
     var base64Url = token.split('.')[1];
     var base64 = base64Url.replace('-', '+').replace('_', '/');
     return JSON.parse(window.atob(base64));
 };
+
 function isExpired() {
-    if(isLoggedIn()) {
+    if (isLoggedIn()) {
         var storageToken = localStorage.getItem("token");
         var cookieToken = getCookie("token")
-        if(storageToken) {
+        if (storageToken) {
             return parseJwt(storageToken).exp > Date.now / 1000;
         }
-        else if(cookieToken) {
+        else if (cookieToken) {
             return parseJwt(cookieToken).exp > Date.now / 1000;
         }
-        
+
     }
     else {
         return true;
     }
-}
+};
+
 function removeAuthTokens() {
     deleteCookie("token", "/", "");
     console.log("removing")
     localStorage.removeItem("token");
-}
+};
+
 function isLoggedIn() {
-    if(localStorage.getItem("token") || getCookie("token")) {
+    if (localStorage.getItem("token") || getCookie("token")) {
         return true
     }
     else {
         return false;
     }
-}
+};
+
 function handlePageAuth() {
     console.log(window.location.pathname)
-    if(window.location.pathname === "/api/admin")
-    {
+    if (window.location.pathname === "/api/admin") {
         var token = localStorage.getItem("token");
-       if( parseJwt(token).role ==="Employee")
-       {
-        window.location.assign("/api/user")
-       }
+        if (parseJwt(token).role === "Employee") {
+            window.location.assign("/api/user")
+        }
 
     }
-    if(window.location.pathname === "/api/user")
-    {
+    if (window.location.pathname === "/api/user") {
         var token = localStorage.getItem("token");
-       if( parseJwt(token).role !=="Employee")
-       {
-        window.location.assign("/api/admin")
-       }
+        if (parseJwt(token).role !== "Employee") {
+            window.location.assign("/api/admin")
+        }
 
     }
-    if(window.location.pathname === "/" || window.location.pathname === "/register" ) {
-        if (isLoggedIn()){
-       window.location.assign("/api/user")}
+    if (window.location.pathname === "/" || window.location.pathname === "/register") {
+        if (isLoggedIn()) {
+            window.location.assign("/api/user")
+        }
     }
-    else if(isExpired()) {
+    else if (isExpired()) {
         console.log("exp")
         window.location.assign("/")
         removeAuthTokens();
-    }   
-}
+    }
+};
+
 handlePageAuth();
 $(document).ready(function () {
     var token = window.localStorage.getItem("token");
@@ -108,23 +112,22 @@ $(document).ready(function () {
             password: $("#password").val(),
         })
             .then(function (resp) {
-              //  console.log("hi"+resp.data.token)
+                //  console.log("hi"+resp.data.token)
                 window.localStorage.setItem("token", resp.data.token)
                 document.cookie += "token=" + resp.data.token;
-           if(parseJwt(resp.data.token).role === "Employee")
-           {
-               window.location = "/api/user";
-           }
-           else{
-            window.location = "/api/admin";
-           }
+                if (parseJwt(resp.data.token).role === "Employee") {
+                    window.location = "/api/user";
+                }
+                else {
+                    window.location = "/api/admin";
+                }
             })
             .catch(function (err) {
                 console.error(err);
             })
     })
 
-  
+
 
 
     $("#submit").on("click", function (e) {
@@ -133,7 +136,7 @@ $(document).ready(function () {
             email: $("#email").val(),
             password: $("#password").val(),
             name: $("#name").val(),
-            role:$("#role").val()
+            role: $("#role").val()
         })
             .then(function (resp) {
                 console.log(resp)
@@ -147,16 +150,15 @@ $(document).ready(function () {
 
     $(".closeTicket").on("click", function (event) {
         var id = $(this).data("id");
-        var email=$(this).data("email");
-        alert(email);
-        console.log("my emaillllllllllllllllllllllllllllll "+email);
+        var email = $(this).data("email");
+        console.log(email);
         // Send the PUT request.
         axios.put("/api/user/", {
             status: "close",
-            isOpen:false,
-            isInProgress:false,
+            isOpen: false,
+            isInProgress: false,
             id: id,
-            email:email
+            email: email
         })
             .then(function (resp) {
                 console.log("changed status to close");
@@ -169,18 +171,18 @@ $(document).ready(function () {
 
     });
 
-    
+
     $(".changeToInProgress").on("click", function (event) {
         var id = $(this).data("id");
-        var email=$(this).data("email");
+        var email = $(this).data("email");
         console.log(email);
-       // Send the PUT request.
+        // Send the PUT request.
         axios.put("/api/user/", {
             status: "inProgress",
-            isOpen:false,
-            isInProgress:true,
+            isOpen: false,
+            isInProgress: true,
             id: id,
-            email:email
+            email: email
         })
             .then(function (resp) {
                 console.log("changed status to in Progress");
@@ -196,15 +198,15 @@ $(document).ready(function () {
 
     $(".changeToComplete").on("click", function (event) {
         var id = $(this).data("id");
-        var email=$(this).data("email");
+        var email = $(this).data("email");
         console.log(email);
-       // Send the PUT request.
+        // Send the PUT request.
         axios.put("/api/user/", {
             status: "completed",
-            isOpen:false,
-            isInProgress:false,
+            isOpen: false,
+            isInProgress: false,
             id: id,
-            email:email
+            email: email
         })
             .then(function (resp) {
                 console.log("changed status to in Progress");
@@ -217,5 +219,5 @@ $(document).ready(function () {
 
     });
 
-})
+});
 

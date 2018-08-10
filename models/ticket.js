@@ -4,8 +4,8 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: false
         },
-        employeeEmail:{
-            type:DataTypes.STRING,
+        employeeEmail: {
+            type: DataTypes.STRING,
             // validate: {
             //     isEmail: true
             // },
