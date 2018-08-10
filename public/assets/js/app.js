@@ -147,12 +147,16 @@ $(document).ready(function () {
 
     $(".closeTicket").on("click", function (event) {
         var id = $(this).data("id");
+        var email=$(this).data("email");
+        alert(email);
+        console.log("my emaillllllllllllllllllllllllllllll "+email);
         // Send the PUT request.
         axios.put("/api/user/", {
             status: "close",
             isOpen:false,
             isInProgress:false,
-            id: id
+            id: id,
+            email:email
         })
             .then(function (resp) {
                 console.log("changed status to close");
@@ -168,12 +172,15 @@ $(document).ready(function () {
     
     $(".changeToInProgress").on("click", function (event) {
         var id = $(this).data("id");
+        var email=$(this).data("email");
+        console.log(email);
        // Send the PUT request.
         axios.put("/api/user/", {
             status: "inProgress",
             isOpen:false,
             isInProgress:true,
-            id: id
+            id: id,
+            email:email
         })
             .then(function (resp) {
                 console.log("changed status to in Progress");
@@ -189,12 +196,15 @@ $(document).ready(function () {
 
     $(".changeToComplete").on("click", function (event) {
         var id = $(this).data("id");
+        var email=$(this).data("email");
+        console.log(email);
        // Send the PUT request.
         axios.put("/api/user/", {
             status: "completed",
             isOpen:false,
             isInProgress:false,
-            id: id
+            id: id,
+            email:email
         })
             .then(function (resp) {
                 console.log("changed status to in Progress");
