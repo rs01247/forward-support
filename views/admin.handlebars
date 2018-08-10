@@ -3,7 +3,7 @@
         <button class="btn btn-lg btn-primary text-uppercase mb-2" id="logout">logout</button>
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h4 class="panel-title">Open Ticket List</h4>
+                <h4 class="panel-title">Open Tickets</h4>
             </div>
             <div class="panel-body" id="tableSection">
             </div>
@@ -31,11 +31,11 @@
                         <td>{{this.priority}}</td>
                         <td>{{this.ticketCategory}}</td>
                         <td>
-                            <button data-toggle="modal" data-target="#myModal">Click to Summary</button>
+                            <button data-toggle="modal" data-target="#myModal">Summary</button>
                         </td>
                         <td>{{this.status}}</td>
                         <td>
-                            <button data-email="{{this.employeeEmail}}" data-id="{{this.id}}" class="changeToInProgress"> Change to In-Progress</button>
+                            <button data-email="{{this.employeeEmail}}" data-id="{{this.id}}" class="changeToInProgress">In Progress</button>
 
                         </td>
                     </tr>
@@ -45,7 +45,7 @@
         </div>
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h4 class="panel-title">In-Progress Ticket List</h4>
+                <h4 class="panel-title">In Progress Tickets</h4>
             </div>
             <div class="panel-body" id="waitlistSection">
             </div>
@@ -73,11 +73,11 @@
                         <td>{{this.priority}}</td>
                         <td>{{this.ticketCategory}}</td>
                         <td>
-                            <button data-toggle="modal" data-target="#myModal">Click to Summary</button>
+                            <button data-toggle="modal" data-target="#myModal">Summary</button>
                         </td>
                         <td>{{this.status}}</td>
                         <td>
-                            <button data-email="{{this.employeeEmail}}" data-id="{{this.id}}" class="changeToComplete"> Change to Complete</button>
+                            <button data-email="{{this.employeeEmail}}" data-id="{{this.id}}" class="changeToComplete">Complete</button>
                         </td>
                     </tr>
                     {{/if}} {{/each}}
