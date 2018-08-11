@@ -159,6 +159,8 @@ router.put("/api/user", function (req, res) {
 router.get('/api/admin', function (req, res) {
     //we need to retrieve tickets for the admin who still open and related to that admin 
     var kind=jwtDecode(req.cookies.token).role.split(" ")[0];
+    var name=jwtDecode(req.cookies.token).name;
+    var role =jwtDecode(req.cookies.token).role;
     db.Ticket.findAll({
         where: [{
             status: {
@@ -173,7 +175,10 @@ router.get('/api/admin', function (req, res) {
     }).then(function (dbTicket) {
         res.render("admin", { 
             Ticket: dbTicket,
-            ticket: 'Admin Page' 
+            ticket: 'Admin Page',
+            name:name,
+            role:role
+
         })
     })
 });
