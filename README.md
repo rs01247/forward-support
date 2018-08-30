@@ -34,5 +34,4 @@ Once the issue is resolved to the users satisfaction, the Admin will update the 
 ### DEMO
 
 A demo of this program can be accessed at this deployed link:
-https://whispering-woodland-47437.herokuapp.com/ - automatic!
-[Heroku Link](https://whispering-woodland-47437.herokuapp.com/)
+https://whispering-woodland-47437.herokuapp.com/
